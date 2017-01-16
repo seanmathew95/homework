@@ -5,4 +5,7 @@ homework 1-12-17
 Absolute v Relative Paths
 answer: 9. cd ..
 
+Relative Path Resolution
+answer: original pnas_final pnas_sub
+
 

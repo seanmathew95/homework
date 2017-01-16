@@ -8,6 +8,10 @@ answer: 9. cd ..
 Relative Path Resolution
 answer: original pnas_final pnas_sub
 
-Reading Comprehension
+ls Reading Comprehension
 answer: 4. Either #2 or #3, but not #1
+
+Exploring More ls Arguments
+answer: Adding the "-l" lists out all the information about the file rather than just its name, such as the file size, date it was created, and the permissions. Adding the "-h" makes information displayed in a human readable format, and not computer jargon. 
+
 

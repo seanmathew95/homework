@@ -14,4 +14,6 @@ answer: 4. Either #2 or #3, but not #1
 Exploring More ls Arguments
 answer: Adding the "-l" lists out all the information about the file rather than just its name, such as the file size, date it was created, and the permissions. Adding the "-h" makes information displayed in a human readable format, and not computer jargon. 
 
+Listing Recursively and By Time
+answer: Using both the "-R" and "-t" addons will make all the folders appear alphabetically but with the files within them appear by the date they were last modified.
 

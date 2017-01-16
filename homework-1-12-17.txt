@@ -2,4 +2,7 @@ Sean Mathew
 homework 1-12-17
 
 
+Absolute v Relative Paths
+answer: 9. cd ..
+
 

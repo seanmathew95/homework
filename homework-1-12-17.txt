@@ -8,4 +8,6 @@ answer: 9. cd ..
 Relative Path Resolution
 answer: original pnas_final pnas_sub
 
+Reading Comprehension
+answer: 4. Either #2 or #3, but not #1
 

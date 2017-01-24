@@ -1,0 +1,227 @@
+Sean Mathew
+Homework week 2
+
+1) cut -d ";" -f 2 Pacifici2013_data.csv|head -n 6|tail -n +2
+Rodentia
+Rodentia
+Rodentia
+Macroscelidea
+Rodentia
+
+2)There are 153 unique families.
+
+Abrocomidae
+Acrobatidae
+Ailuridae
+Anomaluridae
+Antilocapridae
+Aotidae
+Aplodontiidae
+Atelidae
+Balaenidae
+Balaenopteridae
+Bathyergidae
+Bovidae
+Bradypodidae
+Burramyidae
+Caenolestidae
+Callitrichidae
+Calomyscidae
+Camelidae
+Canidae
+Capromyidae
+Castoridae
+Caviidae
+Cebidae
+Cercopithecidae
+Cervidae
+Cheirogaleidae
+Chinchillidae
+Chrysochloridae
+Craseonycteridae
+Cricetidae
+Ctenodactylidae
+Ctenomyidae
+Cuniculidae
+Cyclopedidae
+Cynocephalidae
+Dasypodidae
+Dasyproctidae
+Dasyuridae
+Daubentoniidae
+Delphinidae
+Diatomyidae
+Didelphidae
+Dinomyidae
+Dipodidae
+Dugongidae
+Echimydae
+Echimyidae
+Elephantidae
+Emballonuridae
+Equidae
+Erethizontidae
+Erinaceidae
+Eschrichtiidae
+Eupleridae
+Family
+Felidae
+Furipteridae
+Galagidae
+Geomyidae
+Giraffidae
+Gliridae
+Herpestidae
+Heteromyidae
+Hippopotamidae
+Hipposideridae
+Hominidae
+Hyaenidae
+Hylobatidae
+Hypsiprymnodontidae
+Hystricidae
+Indriidae
+Iniidae
+Lemuridae
+Lepilemuridae
+Leporidae
+Lorisidae
+Macropodidae
+Macroscelididae
+Manidae
+Megadermatidae
+Megalonychidae
+Mephitidae
+Microbiotheriidae
+Molossidae
+Monodontidae
+Mormoopidae
+Moschidae
+Muridae
+Mustelidae
+Myocastoridae
+Myrmecobiidae
+Myrmecophagidae
+Mystacinidae
+Myzopodidae
+Nandiniidae
+Natalidae
+Neobalaenidae
+Nesomyidae
+Noctilionidae
+Notoryctidae
+Nycteridae
+Ochotonidae
+Octodontidae
+Odobenidae
+Ornithorhynchidae
+Orycteropodidae
+Otariidae
+Pedetidae
+Peramelidae
+Petauridae
+Petromuridae
+Phalangeridae
+Phascolarctidae
+Phocidae
+Phocoenidae
+Phyllostomidae
+Physeteridae
+Pitheciidae
+Platacanthomyidae
+Platanistidae
+Potoroidae
+Prionodontidae
+Procaviidae
+Procyonidae
+Pseudocheiridae
+Pteropodidae
+Ptilocercidae
+Rhinocerotidae
+Rhinolophidae
+Rhinopomatidae
+Sciuridae
+Solenodontidae
+Soricidae
+Spalacidae
+Suidae
+Tachyglossidae
+Talpidae
+Tapiridae
+Tarsiidae
+Tarsipedidae
+Tayassuidae
+Tenrecidae
+Thryonomyidae
+Thylacomyidae
+Thyropteridae
+Tragulidae
+Trichechidae
+Tupaiidae
+Ursidae
+Vespertilionidae
+Viverridae
+Vombatidae
+Ziphiidae
+3)
+  697  history
+  698  tail -n +2 Pacifici2013_data.csv 
+  699  tail -n +2 Pacifici2013_data.csv |cut -d ':' -f 2-6
+  700  tail -n +2 Pacifici2013_data.csv |cut -d ':' -f 2-6 | tr -s ':' ' '
+  701  tail -n +2 Pacifici2013_data.csv |cut -d ';' -f 2-6 | tr -s ';' ' '
+  702  tail -n +2 Pacifici2013_data.csv |cut -d ';' -f 2-6 | tr -s ';' ' ' | sort -r -n -k 6
+  703  tail -n +2 Pacifici2013_data.csv |cut -d ';' -f 2-6 | tr -s ';' ' ' | sort -r -n -k 6 > BodyM.csv
+  704  ls
+  705  less BodyM.csv
+  706  history
+  707  history 10
+  708  history 12 >> ~/Desktop/eeb-177/homework/week-2-homework-eeb177.txt 
+
+4)
+Cetartiodactyla Balaenidae Eubalaena Eubalaena glacialis 22999999.91
+
+Chiroptera Vespertilionidae Pipistrellus Pipistrellus nanulus 2.51
+
+5)  718  tail -n 10 BodyM.csv | head -n 1 >> ~/Desktop/eeb-177/homework/week-2-homework-eeb177.txt 
+  719  wc -l BodyM.csv 
+  720  grep Vombatidae BodyM.csv 
+  721  grep -c Vombatidae BodyM.csv 
+  722  grep Bos BodyM.csv 
+  723  grep -w Bos BodyM.csv 
+  724  grep -i Bos BodyM.csv 
+  725  grep -i -c Bos BodyM.csv 
+  726  grep -B 2 -A 2"Gorilla gorilla" BodyM.csv 
+  727  grep -B 2 -A 2 "Gorilla gorilla" BodyM.csv 
+  728  grep -n "Gorilla gorilla" BodyM.csv 
+  729  grep Gorilla BodyM.csv | grep -v gorilla
+  730  grep Gorilla BodyM.csv | grep -v -n gorilla
+  731  grep -w "Gorilla\|Pan" BodyM.csv 
+  732  grep "Gorilla\|Pan" BodyM.csv 
+  733  grep -n "Gorilla\|Pan" BodyM.csv 
+  734  history
+  735  history 14 >> ~/Desktop/eeb-177/homework/week-2-homework-eeb177.txt 
+  736  history 18 >> ~/Desktop/eeb-177/homework/week-2-homework-eeb177.txt 
+  737  history 20 >> ~/Desktop/eeb-177/homework/week-2-homework-eeb177.txt 
+
+6)
+	1) cd ~/Desktop/eeb-177/CSB/unix/sandbox
+	2) 556 k
+	3) cp ../data/Marra2014_data.fasta my_file.fasta
+	4) 16
+	5) tail -n +2 my_file.fasta | tr -s '  ' ';'
+	6) 43
+	7) contig00302 has the highest numreadds=3330
+
+7)for txtfile in *.txt; ;do echo $txtfile; cp $txtfile ../../sandbox/temp/edited-$txtfile; done
+
+8)
+Using grep: 3. grep -w "of" haiku.txt
+find Pipeline Reading Comprehension: this command will firt search the current directory for files that end in '.dat', find the number of lines in each of these files and sort them numerically according to the number of lines they contain
+Matching and Subtracting: 3. grep -v "temp" $(find /data -name '*ose.dat')
+Tracking a Species: grep -w $1 -r $2 | cut -d ',' -f 1,3 > $1.txt
+Little Women:
+for name in littlewomen.txt
+>do 
+>grep -w $name | wc -l
+>done
+Finding Files with Different Properties: find ./ -type f -mtime -1 -user ahmed

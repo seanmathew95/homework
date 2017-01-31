@@ -1,0 +1,24 @@
+Sean Mathew
+Week 3 Homework Questions 1 and 2
+
+Question 1: Allesina 1.11.2
+1) 
+66
+
+2)
+#! /bin/bash
+#takes the name of the file as the first argument
+#and the ID as the second argument
+#and returns the number of records for it
+tail -n +2 $1 | cut -f 1 | grep -w $2 | wc -l
+
+3)
+#! /bin/bash
+#takes the name of the file as the first argument
+#returns the number of times each individual was sampled
+for number in 1-127
+	do echo $number :
+	do tail -n +2 $1 | cut -f 1 | grep -w $2 | wc -l
+	done
+
+

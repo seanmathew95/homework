@@ -36,16 +36,5 @@ cut -d " " -f 1 $1 | wc -l
 echo -n "Number of columns: "
 head $1 -n 1 | wc -w
 
-
-
 2)
-#! /bin/bash
-#takes no arguments
-#returns name and number of rows and columns for each file in Saavedra2013
-for file in ~/Desktop/eeb-177/CSB/unix/data/Saavedra2013/*.txt
-	do
-	echo -n $file
-	cut -d " " -f 1 $file | wc -l
-	head -n 1 $file | wc -w
-done
 

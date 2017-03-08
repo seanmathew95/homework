@@ -1,0 +1,468 @@
+---
+title: "r-week-8-hw-eeb177"
+author: "Sean Mathew"
+date: "March 7, 2017"
+output: md_document
+---
+# Analysis of Family Canidae
+## From python output
+file canid_ranges.csv created from python functions extract_fossil_ages and dict_to_file
+```{r}
+library(ggplot2)
+canids <- read.csv("data_hw8/canid_ranges.csv", header = F, as.is = T)
+names(canids) <- c("genus", "species", "minage", "maxage")
+head(canids)
+```
+
+```{r}
+canid_occ <- ggplot(canids, aes( species, ymin = maxage, ymax=minage, colour = genus))
+canid_occ <- canid_occ + geom_linerange()
+canid_occ <- canid_occ + theme(legend.position="none")
+canid_occ <- canid_occ + coord_flip()
+canid_occ <- canid_occ +  theme(axis.text.y = element_text(size=3))
+canid_occ <- canid_occ + theme(axis.ticks.y=element_blank())
+canid_occ <- canid_occ + scale_y_continuous(limits=c(0, 40), expand = c(0, 0), breaks=c(0, 10, 20, 30, 40))
+canid_occ <- canid_occ + labs(title = "Canid Fossil Occurrences", x = "Species", y = "Ma ago") + theme(plot.title = element_text(hjust = 0.5, size=22, face = "bold"), axis.title =element_text(size=20))
+
+canid_occ
+```
+
+```{r}
+ggsave(filename = "data_hw8/canid-occ.pdf", plot = canid_occ)
+```
+## Questions
+### 1)  What taxonomic group is displayed?
+The family canidae
+
+### 2)  How many unique fossil species are contained within it?
+```{r}
+num_species <- length(unique(canids$species))
+num_species
+```
+**Answer: 161**
+
+### 3)  How many unique fossil genera?
+```{r}
+num_genus <- length(unique(canids$genus))
+num_genus
+```
+**Answer: 56**
+
+### 4)  What species has the longest fossil range?
+**Answer: Cormocyon copei** (used python function get_longest_species_range)
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Analysis of suborder feliformia
+```{r}
+library(ggplot2)
+feliform <- read.csv("data_hw8/feliform_ranges.csv", header = F, as.is = T)
+names(feliform) <- c("genus", "species", "minage", "maxage")
+feliform_occ <- ggplot(feliform, aes( species, ymin = maxage, ymax=minage, colour = genus))
+feliform_occ <- feliform_occ + geom_linerange()
+feliform_occ <- feliform_occ + theme(legend.position="none")
+feliform_occ <- feliform_occ + coord_flip()
+feliform_occ <- feliform_occ +  theme(axis.text.y = element_text(size=3))
+feliform_occ <- feliform_occ + theme(axis.ticks.y=element_blank())
+feliform_occ <- feliform_occ + scale_y_continuous(limits=c(0, 40), expand = c(0, 0), breaks=c(0, 10, 20, 30, 40))
+feliform_occ <- feliform_occ + labs(title = "Feliform Fossil Occurrences", x = "Species", y = "Ma ago") + theme(plot.title = element_text(hjust = 0.5, size=22, face = "bold"), axis.title =element_text(size=20))
+
+feliform_occ
+```
+
+
+
+```{r}
+ggsave(filename = "data_hw8/feliform-occ.pdf", plot = feliform_occ)
+```
+
+## Questions
+### 1)  What taxonomic group is displayed?
+The suborder feliformia
+
+### 2)  How many unique fossil species are contained within it?
+```{r}
+num_species <- length(unique(feliform$species))
+num_species
+```
+**Answer: 175**
+
+### 3)  How many unique fossil genera?
+```{r}
+num_genus <- length(unique(feliform$genus))
+num_genus
+```
+**Answer: 78**
+
+### 4)  What species has the longest fossil range?
+**Answer: Palaeogale sectoria** (used python function get_longest_species_range())
+
+
+
+
+
+
+
+
+
+
+
+
+# Extra credit
+
+```{r}
+feliform_genus <- read.csv("data_hw8/feliform_genus.csv", header = F, as.is = T)
+names(feliform_genus) <- c("genus", "minage", "maxage")
+
+feliform_genus_occ <- ggplot(feliform_genus, aes( genus, ymin = maxage, ymax=minage, colour = genus))
+feliform_genus_occ <- feliform_genus_occ + geom_linerange()
+feliform_genus_occ <- feliform_genus_occ + theme(legend.position="none")
+feliform_genus_occ <- feliform_genus_occ + coord_flip()
+feliform_genus_occ <- feliform_genus_occ +  theme(axis.text.y = element_text(size=3))
+feliform_genus_occ <- feliform_genus_occ + theme(axis.ticks.y=element_blank())
+feliform_genus_occ <- feliform_genus_occ + scale_y_continuous(limits=c(0, 45), expand = c(0, 0), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45))
+feliform_genus_occ <- feliform_genus_occ + labs(title = "Canid Fossil Occurrences by Genus", x = "Genus", y = "Ma ago") + theme(plot.title = element_text(hjust = 0.5, size=22, face = "bold"), axis.title =element_text(size=20))
+
+feliform_genus_occ
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+ggsave(filename = "data_hw8/feliform-genus-occ.pdf", plot = feliform_genus_occ)
+```
+
+
+# Part 2
+## Exploring Data Frames
+```{r}
+#Adding columns and rows in data frame
+cats <- read.csv(file = "../class-assignments/data_week8/feline-data.csv")
+age <- c(4,5,8)
+cats <- cbind(cats, age)
+cats
+
+#Factors
+levels(cats$coat) <- c(levels(cats$coat), 'tortoiseshell')
+cats <- rbind(cats, list("tortoiseshell", 3.3, TRUE, 9))
+
+str(cats)
+cats$coat <- as.character(cats$coat)
+cats
+#Removing rows
+cats[-4,]
+cats
+cats <- na.omit(cats)
+
+#Appending data frame
+cats <- rbind(cats, cats)
+cats
+
+rownames(cats) <- NULL
+cats
+
+#1
+df <- data.frame(first = c('Sean'),
+                 last = c('Mathew'),
+                 lucky_number = c(3),
+                 stringsAsFactors = FALSE)
+df <- rbind(df, c("Jackson", "Vo", 7),  c("Prince", "Paul", 8))
+df <- cbind(df, coffeetime = c(TRUE, TRUE, FALSE))
+df
+
+#Realistic Example
+gapminder <- read.csv("https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder-FiveYearData.csv")
+
+str(gapminder)
+
+typeof(gapminder$year)
+
+typeof(gapminder$country)
+
+str(gapminder$country)
+
+length(gapminder)
+
+typeof(gapminder)
+
+nrow(gapminder)
+
+ncol(gapminder)
+
+dim(gapminder)
+
+colnames(gapminder)
+
+head(gapminder)
+
+#challenge 2
+gapminder <-2
+gapminder
+source(file = "~/scripts/load-gapminder.R")
+gapminder
+
+#challenge 3
+  #country: factor, year: int vector, pop: numeric vector, continent: factor, lifeExp: numeric vector, gdpPercap: numeric vector
+
+```
+
+## Subsetting Data. Show your work for the examples and answer Challenges 1-8.
+```{r}
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+
+#Accessing elements using their indices
+x[1]
+x[4]
+x[c(1,3)]
+x[1:4]
+1:4
+c(1,2,3,4)
+x[c(1,1,2)]
+#x[6]
+#x[0]
+
+#Skipping and removing elements
+x[-2]
+x[c(-1,-3)]
+x[-c(2,3)]
+x[-(1:3)]
+x <- x[-2]
+x
+
+#challenge 1
+  #given:
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+print(x)
+x[2:4]
+x[c(-1,-5)]
+x[-c(1,5)]
+
+#Subsetting by name
+x[c("a", "c")]
+x[-which(names(x) == "a")]
+
+#challenge 2
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+#the following will give the original vector x, nothing removed
+x[-which(names(x) == "g")]
+#A:T, B:F, C:T, D:F, E:F
+
+#Subsetting through other logical operations
+x[c(TRUE, TRUE, FALSE, FALSE)]
+x[c(TRUE, FALSE)]
+
+x[x > 7]
+
+
+#challenge 3
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+print(x)
+#write subset of x greater than 4 and les than 7
+x_new <- x[x>4 & x<7]
+
+#Factor subsetting
+f <- factor(c("a", "a", "b", "c", "c", "d"))
+f[f == "a"]
+f[f %in% c("b", "c")]
+f[1:3]
+f[-3]
+
+#Matrix subsetting
+set.seed(1)
+m <- matrix(rnorm(6*4), ncol=4, nrow=6)
+m[3:4, c(3,1)]
+m[, c(3,4)]
+m[3,]
+m[3, , drop=FALSE]
+
+m[5]
+#m[, c(3,6)]
+matrix(1:6, nrow=2, ncol=3, byrow=TRUE)
+
+#challenge 4
+m <- matrix(1:18, nrow=3, ncol=6)
+print(m)
+ #   Which of the following commands will extract the values 11 and 14?
+  #A. m[2,4,2,5]
+  #B. m[2:5]
+  #C. m[4:5,2]
+  #D. m[2,c(4,5)] <-------------answer
+
+#List subsetting
+xlist <- list(a = "Software Carpentry", b = 1:10, data = head(iris))
+xlist[1]
+xlist[1:2]
+xlist[[1]]
+#xlist[[1:2]]
+#xlist[[-1]]
+xlist[["a"]]
+xlist$data
+
+#challenge 5
+xlist <- list(a = "Software Carpentry", b = 1:10, data = head(iris))
+#Using your knowledge of both list and vector subsetting, extract the number 2 from xlist. Hint: the number 2 is contained within the “b” item in the list.
+xlist$b[2]
+
+#challenge 6
+#given:
+mod <- aov(pop ~ lifeExp, data=gapminder)
+attributes(mod)
+mod$df.residual
+
+#Data frames
+head(gapminder[3])
+head(gapminder[["lifeExp"]])
+head(gapminder$year)
+gapminder[1:3,]
+gapminder[3,]
+
+#challenge 7
+#Fix each of the following common data frame subsetting errors:
+    #Extract observations collected for the year 1957
+    #gapminder[gapminder$year = 1957,]
+gapminder[gapminder$year == 1957,]
+    #Extract all columns except 1 through to 4
+    #gapminder[,-1:4]
+gapminder[,-c(1:4)]
+    #Extract the rows where the life expectancy is longer the 80 years
+    #gapminder[gapminder$lifeExp > 80]
+gapminder[gapminder$lifeExp > 80,]
+    #Extract the first row, and the fourth and fifth columns (lifeExp and gdpPercap).
+    #gapminder[1, 4, 5]
+gapminder[1, c(4, 5)]
+    #Advanced: extract rows that contain information for the years 2002 and 2007
+    #gapminder[gapminder$year == 2002 | 2007,]
+gapminder[gapminder$year == 2002 | gapminder$year == 2007,]
+gapminder[gapminder$year %in% c(2002, 2007),]
+
+#challenge 8
+
+
+    #Why does gapminder[1:20] return an error? How does it differ from gapminder[1:20, ]?
+#gapminder is not a single dimentional object, and therefore needs a second dimention argument
+    #Create a new data.frame called gapminder_small that only contains rows 1 through 9 and 19            through 23. You can do this in one or two steps.
+gapminder_small = gapminder[c(1:9,19:23), ]
+```
+
+
+## Creating Publication Quality Graphcs. 
+```{r}
+library("ggplot2")
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp))
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+
+
+
+#challenge 1
+  #Modify the example so that the figure visualise how life expectancy has changed over time:
+  #ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point()
+ggplot(data = gapminder, aes(x=year, y=lifeExp)) + geom_point()
+
+#challenge 2
+  #In the previous examples and challenge we’ve used the aes function to tell the scatterplot geom    about the x and y locations of each point. Another aesthetic property we can modify is the point    color. Modify the code from the previous challenge to color the points by the “continent” column.   What trends do you see in the data? Are they what you expected?
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +geom_point()
+#lifeExp increases every year, as expected
+
+
+
+
+
+
+#Layers
+ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country, color=continent)) +
+  geom_line()
+ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country, color=continent)) +
+  geom_line() + geom_point()
+ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country)) +
+  geom_line(aes(color=continent)) + geom_point()
+
+
+
+
+#challenge 3
+  #Switch the order of the point and line layers from the previous example. What happened?
+
+ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country)) + geom_point() + geom_line(aes(color=continent))
+#the colored lines are in front of the black lines
+
+
+
+
+#Transformations and Statistics
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color=continent)) +
+  geom_point()
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(alpha = 0.5) + scale_x_log10()
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() + scale_x_log10() + geom_smooth(method="lm")
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() + scale_x_log10() + geom_smooth(method="lm", size=1.5)
+
+
+
+#challenge 4a
+  #Modify the color and size of the points on the point layer in the previous example
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(color = "red", size =0.5) + scale_x_log10() + geom_smooth(method="lm", size=1.5)
+
+#challenge 4b
+  #Modify your solution to Challenge 4a so that the points are now a different shape and are colored by continent with new trendlines.
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point(size =0.5, pch =12) + scale_x_log10() + geom_smooth(method="lm", size=1.5)
+
+
+
+
+
+#Multi panel figures
+starts.with <- substr(gapminder$country, start = 1, stop = 1)
+az.countries <- gapminder[starts.with == "A" | starts.with == "Z", ]
+ggplot(data = az.countries, aes(x = year, y = lifeExp, color=continent)) +
+  geom_line() + facet_wrap( ~ country)
+
+#Modifying text
+ggplot(data = az.countries, aes(x = year, y = lifeExp, color=continent)) +
+  geom_line() + facet_wrap( ~ country) +
+  xlab("Year") + ylab("Life expectancy") + ggtitle("Figure 1") +
+  scale_colour_discrete(name="Continent") +
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+
+
+
+#challenge 5
+  #Create a density plot of GDP per capita, filled by continent.
+  #Advanced:
+    #Transform the x axis to better visualise the data spread.
+    #Add a facet layer to panel the density plots by year.
+ggplot(data = gapminder, aes(x = gdpPercap, fill=continent)) +
+ geom_density(alpha=0.6) + facet_wrap( ~ year) + scale_x_log10()
+```
+
+
+
+
+
